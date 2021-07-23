@@ -1,31 +1,23 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
-import hello.hellospring.repository.MemoryMemberRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import hello.hellospring.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-// 정말 좋은 테스트는 이런 단위 테스트를 가지고 테스트 하는 것 이다!! 스프링 컨테이너까지 올리고 하는건..... 테스트 설계가 잘못되었을 확률이 높다!
+@SpringBootTest
+@Transactional
+class MemberServiceIntegrationTest { // 자동으로 Test를 만들고 싶으면, 해당하는 class에서 ctrl + shilt + t 누르면 된다.. 신기
 
-class MemberServiceTest { // 자동으로 Test를 만들고 싶으면, 해당하는 class에서 ctrl + shilt + t 누르면 된다.. 신기
+    // 스프링 컨테이너에 등록되어있는 bean을 끌고온다.
+    @Autowired MemberService memberService;
+    @Autowired MemberRepository memberRepository;
 
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
-
-    @BeforeEach
-    public void beforeEach(){
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-
-    @AfterEach
-    public void afterEach(){ // 테스트 함수가 끝날때마다 실행하는 함수
-        memberRepository.clearStore();
-    }
 
     // Test코드는 과감하게 한글로 써도 된다
     @Test
@@ -68,11 +60,4 @@ class MemberServiceTest { // 자동으로 Test를 만들고 싶으면, 해당하
 
     }
 
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
-    }
 }
