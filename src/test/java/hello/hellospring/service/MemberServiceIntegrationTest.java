@@ -24,7 +24,7 @@ class MemberServiceIntegrationTest { // 자동으로 Test를 만들고 싶으면
     void 회원가입() { // Test를 진행할 때 1. given 2. when 3. then 순서로 차근차근 진행해보기
         // given
         Member member = new Member();
-        member.setName("hello");
+        member.setName("hello0914");
 
         // when
         Long saveId = memberService.join(member);
